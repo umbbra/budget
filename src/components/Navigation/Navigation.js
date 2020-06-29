@@ -1,26 +1,29 @@
 import React from 'react';
-import { Wrapper } from 'components';
+import PropTypes from 'prop-types';
+
+import { Link } from "react-router-dom";
+// import { Wrapper } from 'components';
 
 // import { useTranslation } from 'react-i18next';
 // import { Button } from 'components';
 
-import { Container, List } from './Navigation.css';
+import { Container, NavigationWrapper, List } from './Navigation.css';
 
 const Navigation = ({ items = [{}], RightElement }) => {
   // const { t } = useTranslation();
 
   return (
     <Container>
-      <Wrapper>
+      <NavigationWrapper>
         <List>
           {items.map(item => (
-            <li key={item.to}>
-             tatata
+           <li key={item.to}>
+            <Link to={item.to}>{item.content}</Link>
             </li>
           ))}
         </List>
-        {/* {RightElement} */}
-      </Wrapper>
+        {RightElement}
+      </NavigationWrapper>
     </Container>
   );
 };
@@ -28,5 +31,9 @@ const Navigation = ({ items = [{}], RightElement }) => {
 // Navigation.defaultProps = {
 //   items: [],
 // };
+
+Navigation.propTypes =  {
+ items: PropTypes.array.isRequired
+}
 
 export default Navigation;
