@@ -1,51 +1,63 @@
-import React from 'react';
-import { ThemeProvider } from "styled-components";
+import React, { Fragment, Suspense, useCallback } from 'react';
 import {
- BrowserRouter as Router,
- Switch,
- Route
-} from "react-router-dom";
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import GlobalStyles from 'index.css';
+import { Navigation } from 'components';
+import theme from 'utils/theme';
 
-import GlobalStyles from './index.css';
+// import Budget from './pages/Budget';
 
-import theme from 'utils/theme'
+const RootPage = () => {
+  const { t, i18n } = useTranslation();
 
-import { Navigation, Wrapper } from 'components';
+  const changeLanguage = useCallback(lng => {
+    i18n.changeLanguage(lng);
+  }, [i18n]);
 
+  return (
+    <Fragment>
+      <GlobalStyles />
+
+      <Router>
+        <Navigation
+          items={[
+            { content: t('Home'), to: '/' },
+            { content: t('Budget'), to: '/budget' },
+          ]}
+          RightElement={(
+            <div>
+              <button onClick={() => changeLanguage('pl')}>pl</button>
+              <button onClick={() => changeLanguage('en')}>en</button>
+            </div>
+          )}
+        />
+        <Switch>
+          <Route exact path="/">
+            {t('Home')}
+          </Route>
+          <Route path="/budget">
+            {t("Budget")}
+          </Route>
+        </Switch>
+      </Router>
+    </Fragment>
+  );
+};
 
 
 function App() {
- return (
-  <ThemeProvider theme={theme}>
-   <GlobalStyles />
-   <div className="App">
-
-   </div>
-   <Router>
-    <Navigation items={[
-     {
-      content: 'HomePage',
-      to: '/'
-     },
-     {
-      content: 'Budget',
-      to: '/budget'
-     },
-    ]}  RightElement={(
-     <div>
-      <button>PL</button>
-      <button>EN</button>
-      </div>
-    )} />
-    <Wrapper>
-     <Switch>
-      <Route exact path="/">HomePage</Route>
-      <Route path="/budget">Budget page</Route>
-     </Switch>
-    </Wrapper>
-   </Router>
-  </ThemeProvider>
- );
+  return (
+    <ThemeProvider theme={theme}>
+      <Suspense fallback={"Loading..."}>
+        <RootPage />
+      </Suspense>
+    </ThemeProvider>
+  );
 }
 
 export default App;

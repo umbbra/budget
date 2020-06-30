@@ -16,4 +16,8 @@ export const NavigationWrapper = styled(Wrapper)`
 
 export const List = styled.ul`
  display: flex;
+ a{
+  color: white;
+  text-decoration:none;
+ }
 `;

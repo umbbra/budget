@@ -11,5 +11,8 @@ ${normalize}
      margin-left: ${({ theme }) => theme.spacing.xs}px;
     }
   }
+  *{
+   font-family: sans-serif;
+  }
 `
 
