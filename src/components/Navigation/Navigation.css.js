@@ -7,11 +7,13 @@ export const Container = styled.div`
  padding: ${({ theme }) => theme.spacing.xl}px 0;
  justify-content: space-between;
  color: white;
+ height: 90px
 `;
 
 export const NavigationWrapper = styled(Wrapper)`
  display: flex;
  justify-content: space-between;
+ 
 `;
 
 export const List = styled.ul`

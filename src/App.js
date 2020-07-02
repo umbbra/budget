@@ -7,8 +7,10 @@ import {
 import { ThemeProvider } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import GlobalStyles from 'index.css';
-import { Navigation, Wrapper, LoadingIndicator } from 'components';
+import { Navigation, Wrapper, LoadingIndicator, Button } from 'components';
 import theme from 'utils/theme';
+
+
 
 // import Budget from './pages/Budget';
 
@@ -30,9 +32,9 @@ const RootPage = () => {
       { content: 'Budget', to: '/budget' },
      ]}
      RightElement={(
-      <div>
-       <button onClick={() => changeLanguage('pl')}>pl</button>
-       <button onClick={() => changeLanguage('en')}>en</button>
+      <div style={{display: 'flex', height: '40px'}}>
+       <Button variant="regulare" onClick={() => changeLanguage('pl')}>pl</Button>
+       <Button variant="regulare" onClick={() => changeLanguage('en')}>en</Button>
       </div>
      )}
     />
